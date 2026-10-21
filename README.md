@@ -8,6 +8,7 @@
 | --- | --- |
 | [`skill-authoring`](skill-authoring/SKILL.md) | 编写、修改与检查 skill 本身的规范 |
 | [`zju-lab-report`](zju-lab-report/SKILL.md) | 浙江大学课程实验报告的撰写、补写、编译与检查（Typst + ZJU-Project-Report-Template submodule） |
+| [`git-agents`](git-agents/SKILL.md) | 跨机器、跨 harness 同步全局指令与 harness 文件（submodule 引入 [floklein/git-agents](https://github.com/floklein/git-agents)） |
 
 每个 skill 是一个目录，含必需的 `SKILL.md`（YAML frontmatter 的 `name`、`description`，加上正文），以及可选的 `references/`、`scripts/`、`assets/`。
 
@@ -16,10 +17,30 @@
 克隆到全局 skills 目录：
 
 ```bash
-git clone <本仓库 URL> ~/.claude/skills
+git clone --recurse-submodules <本仓库 URL> ~/.claude/skills
 ```
 
-已有 `~/.claude/skills` 目录时，把它添加为远端再拉取即可；目录本身就是一个 git 仓库。
+已有 `~/.claude/skills` 目录时，把它添加为远端再拉取即可；目录本身就是一个 git 仓库。克隆后记得初始化子模块：
+
+```bash
+git submodule update --init --recursive
+```
+
+`dsh` 从 `~/.dsh/skills` 读取 skills，可链接到本目录，避免维护两份：
+
+```powershell
+New-Item -ItemType SymbolicLink -Path "$env:USERPROFILE\.dsh\skills" -Target "$env:USERPROFILE\.claude\skills"
+```
+
+### 子模块与符号链接
+
+`git-agents` 以 submodule 形式引入上游仓库的 `skills/git-agents`，因此在仓库根目录放了一个符号链接 `git-agents -> .upstream/git-agents/skills/git-agents`，让 skill 仍能被正常发现。更新到上游最新版：
+
+```bash
+git submodule update --remote .upstream/git-agents
+```
+
+符号链接在 Linux/macOS 上开箱即用；Windows 需开启 Developer Mode（或以管理员身份克隆），并确保 `core.symlinks=true`。
 
 ## 约定
 

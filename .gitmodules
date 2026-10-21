@@ -1,0 +1,3 @@
+[submodule ".upstream/git-agents"]
+	path = .upstream/git-agents
+	url = https://github.com/floklein/git-agents.git
