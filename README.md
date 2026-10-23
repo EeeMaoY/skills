@@ -9,6 +9,7 @@
 | [`skill-authoring`](skill-authoring/SKILL.md) | 编写、修改与检查 skill 本身的规范 |
 | [`zju-lab-report`](zju-lab-report/SKILL.md) | 浙江大学课程实验报告的撰写、补写、编译与检查（Typst + ZJU-Project-Report-Template submodule） |
 | [`git-agents`](git-agents/SKILL.md) | 跨机器、跨 harness 同步全局指令与 harness 文件（submodule 引入 [floklein/git-agents](https://github.com/floklein/git-agents)） |
+| [`self-improve`](self-improve/SKILL.md) | 让 agent 自我更新与迭代：沉淀跨会话偏好到全局 `CLAUDE.md`，迭代 skills，或更新仓库的 `AGENTS.md` |
 
 每个 skill 是一个目录，含必需的 `SKILL.md`（YAML frontmatter 的 `name`、`description`，加上正文），以及可选的 `references/`、`scripts/`、`assets/`。
 
@@ -45,7 +46,7 @@ git submodule update --remote .upstream/git-agents
 ## 约定
 
 - **以个人使用为优先。**本仓库主要服务于自己在多台机器上的使用；submodule URL、符号链接、目录布局等取舍以本人使用便利为主。
-- **只放跨项目通用的 skill。**与具体仓库绑定的内容（该项目的目录结构、构建命令、课程或业务约定）放在那个仓库自己的 `.claude/skills/` 下；每次会话都需要的短约定写进该仓库的 `CLAUDE.md`，不放进 skill。
+- **只放跨项目通用的 skill。**与具体仓库绑定的内容（该项目的目录结构、构建命令、课程或业务约定）放在那个仓库自己的 `.claude/skills/` 下；每次会话都需要的短约定写进该仓库的 `AGENTS.md`，不创建 `CLAUDE.md`，已有的也应迁移过去，不放进 skill。
 - **本仓库是公开的，不要提交任何真实个人信息**——学号、姓名、邮箱、账号、主机名、内网地址、密钥凭证。需要区分身份时用占位符（`<学号>`、`<姓名>`、`<用户>`）。
 - 项目级 skill 应**引用**这里的通用 skill，而不是复制其内容，否则两份内容迟早会漂移成不一致的版本。
 
